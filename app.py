@@ -125,11 +125,22 @@ elif selected == "About":
 
 st.markdown("""
     <style>
-    /* Set the sidebar width and prevent text wrapping */
-    [data-testid="stSidebar"] {
-        min-width: 310px;
-        # width: 310px;
-        max-width: 350px;
+    /* Responsive sidebar: expands main content when sidebar is closed */
+    [data-testid="stSidebar"][aria-expanded="true"] {
+        min-width: 350px;
+    }
+    [data-testid="stSidebar"][aria-expanded="false"] {
+        min-width: 0 !important;
+        max-width: 0 !important;
+        width: 0 !important;
+        /* Hide overflow to prevent ghost sidebar */
+        overflow: hidden;
+    }
+    @media (max-width: 900px) {
+        [data-testid="stSidebar"][aria-expanded="true"] {
+            min-width: 100vw !important;
+            max-width: 100vw !important;
+        }
     }
     </style>
 """, unsafe_allow_html=True)
